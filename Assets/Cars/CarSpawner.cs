@@ -23,7 +23,7 @@ public class CarSpwner : MonoBehaviour
         if (lastSpawn > spawnInterval)
         {
             SpawnCar();
-            lastSpawn = 0;
+            lastSpawn = 0;//a
         }
 
         MoveCars();
