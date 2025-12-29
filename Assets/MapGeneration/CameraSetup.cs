@@ -5,7 +5,7 @@ public class CameraSetup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     static Camera mainCamera;
     public static int mapWidth = 50, mapHeight= 50;
-    public static void Start()
+    public static void FirstFloor()
     {
         mainCamera = Camera.main;
         if (mainCamera == null )

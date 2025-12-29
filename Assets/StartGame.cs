@@ -7,7 +7,7 @@ public class StartGame : MonoBehaviour
     [SerializeField] public NPCSpawner npcSpawner;
     void Start()
     {
-        MapGeneration.Start();
+        MapGeneration.GenerateFirstFloor();
         
     }
 

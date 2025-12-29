@@ -8,16 +8,31 @@ public class CafeWallsGeneration : MonoBehaviour
     public static void Start()
     {
         //front wall
-        for(int j=0; j< 5; j++)
-        for(int i = 4; i< 46; i++)
+        for (int j = 0; j < 9; j++)
         {
-            GameObject wall = getWall(new Vector3(7, j, i), ((i== 25 || i==24) && (j==0 || j==1 || j==2)));
-            MapGeneration.mapObjects.Add(wall);
+            for (int i = 4; i < 46; i++)
+            {
+                GameObject wall = getWall(new Vector3(7, j, i), ((i == 25 || i == 24) && j < 5), ((i % 6 == 2 || i % 6 == 3) && (j > 3 && j < 7)));
+                GameObject wall2 = getWall(new Vector3(47, j, i), false, ((i % 6 == 2 || i % 6 == 3) && (j > 3 && j < 7)));
+
+                MapGeneration.mapObjects.Add(wall);
+                MapGeneration.mapObjects.Add(wall2);
+
+            }
+
+            for (int i= 7; i < 47; i++)
+            {
+                GameObject wall = getWall(new Vector3(i, j, 4), false, false);
+                GameObject wall2 = getWall(new Vector3(i, j, 46), false, false);
+
+                MapGeneration.mapObjects.Add(wall);
+                MapGeneration.mapObjects.Add(wall2);
+            }
         }
 
     }
 
-    static GameObject getWall(Vector3 pos, bool isDoor)
+    static GameObject getWall(Vector3 pos, bool isDoor, bool isWindow)
     {
         GameObject wall = new GameObject("wall cube");
         wall.transform.position = pos;
@@ -78,6 +93,15 @@ public class CafeWallsGeneration : MonoBehaviour
         var mat = new Material(Shader.Find("Unlit/Color"));
         if(isDoor)
             mat.color = Color.rosyBrown;
+        else
+            if (isWindow)
+        {
+            mat = new Material(Shader.Find("Unlit/Transparent"));
+    mat.color = new Color(0f, 0.5f, 1f, 0.4f);
+
+           
+
+        }
         else
             mat.color = Color.saddleBrown;
         renderer.material = mat;
