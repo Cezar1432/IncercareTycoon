@@ -10,9 +10,9 @@ public class CameraSetup : MonoBehaviour
         mainCamera = Camera.main;
         if (mainCamera == null )
         {
-            GameObject cam = new GameObject("Main Camera");
+            GameObject cam = new GameObject("MainCamera");
             mainCamera= cam.AddComponent<Camera>();
-            cam.tag = "Main Camera";
+            cam.tag = "MainCamera";
 
         }
 

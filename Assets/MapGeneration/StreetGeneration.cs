@@ -9,11 +9,11 @@ public class StreetGeneration : MonoBehaviour
     [Header("Map Settings")]
     static int  mapWidth = 50;
     static int mapHeight = 50;
-    static List<GameObject> mapObjects= new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static void Start()
     {
         GenerateRoads();
+        generateSidewalk();
 
     }
 
@@ -21,6 +21,52 @@ public class StreetGeneration : MonoBehaviour
     void Update()
     {
 
+    }
+    public static void generateSidewalk()
+    {
+
+        for(int i= 0; i< CameraSetup.mapWidth; i++)
+        {
+            GameObject sidewalkTile = getSidewalkTile(new Vector3(6f, 0, i));
+            MapGeneration.mapObjects.Add(sidewalkTile);
+        }
+        for (int i = 0; i < CameraSetup.mapWidth; i++)
+        {
+            GameObject sidewalkTile = getSidewalkTile(new Vector3(5f, 0, i));
+            MapGeneration.mapObjects.Add(sidewalkTile);
+        }
+
+    }
+    public static GameObject getSidewalkTile(Vector3 pos)
+    {
+
+        GameObject tile = new GameObject("Sidewalk Tile");
+        tile.transform.position = pos;
+        MeshFilter filter = tile.AddComponent<MeshFilter>();
+        MeshRenderer renderer = tile.AddComponent<MeshRenderer>();
+        Mesh mesh = new Mesh();
+        Vector3[] verticies = new Vector3[4]
+        {
+            new Vector3 (0, 0, 0)
+            ,
+            new Vector3(1, 0, 0)
+            ,
+            new Vector3(1, 0, 1)
+            ,
+            new Vector3(0, 0, 1)
+        };
+
+        int[] triangles = new int[6] { 0, 2, 1, 0, 3, 2 };
+        mesh.vertices = verticies;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+
+        filter.mesh = mesh;
+        Material mat = new Material(Shader.Find("Unlit/Color"));
+        mat.color = Color.grey;
+
+        renderer.material = mat;
+        return tile;
     }
     private static void GenerateRoads()
     {
@@ -31,7 +77,7 @@ public class StreetGeneration : MonoBehaviour
                 
                 
                     GameObject roadTile = getRoadTile(new Vector3(i, 0, j), j%3 != 0 && i== 2);
-                    mapObjects.Add(roadTile);
+                    MapGeneration.mapObjects.Add(roadTile);
                 
                 
             }
