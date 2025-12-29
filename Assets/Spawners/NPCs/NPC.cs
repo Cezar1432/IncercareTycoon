@@ -45,7 +45,7 @@ public class NPC : MonoBehaviour
     {
         this.state = state;
     }
-    Vector3 cafeEnterance = new Vector3(6.5f, 0, 25);
+    Vector3 cafeEnterance = new Vector3(6.5f, 0, 24.5f);
     public void Update()
     {
         switch (state)

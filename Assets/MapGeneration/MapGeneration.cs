@@ -10,6 +10,7 @@ public class MapGeneration : MonoBehaviour
     public static void Start()
     {
         CafeFloorGenerator.Start();
+        CafeWallsGeneration.Start();
         StreetGeneration.Start();
         CameraSetup.Start();
         
