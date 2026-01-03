@@ -6,8 +6,9 @@ public class MapGeneration : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static List<GameObject> mapObjects = new List<GameObject>();
+    [SerializeField] AssetGeneration assets;
 
-    public static void GenerateFirstFloor()
+    public void GenerateFirstFloor()
     {
         foreach (var obj in mapObjects)
         {
@@ -18,6 +19,7 @@ public class MapGeneration : MonoBehaviour
         CafeWallsGeneration.Start();
         StreetGeneration.Start();
         CameraSetup.FirstFloor();
+        assets.Start();
         
     }
     public static void GenerateSecondFloor()
